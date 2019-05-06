@@ -89,32 +89,32 @@ namespace Record_Objects
                 }
             }
             dataArr.AllowUserToDeleteRows = false;
-            int index = 0;
-            while (index < visibleRecs)
+            int index = 1;
+            foreach (Developer dev in devs)
             {
-                foreach (Developer dev in devs)
-                {
-                    index++;
-                    DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone();
-                    row.Cells[0].Value = dev.GetName();
-                    row.Cells[1].Value = dev.GetAddress();
-                    row.Cells[2].Value = dev.GetEmpType();
-                    row.Cells[3].Value = dev.GetSupervisor();
-                    row.Cells[5].Value = dev.GetDevType();
-                    row.Cells[6].Value = dev.GetTaxType();
-                    dataArr.Rows.Add(row);
-                }
-                foreach (Manager mgr in mgrs)
-                {
-                    index++;
-                    DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone();
-                    row.Cells[0].Value = mgr.GetName();
-                    row.Cells[1].Value = mgr.GetAddress();
-                    row.Cells[2].Value = mgr.GetEmpType();
-                    row.Cells[3].Value = mgr.GetSupervisor();
-                    row.Cells[4].Value = mgr.GetCostCenter();
-                    dataArr.Rows.Add(row);
-                }
+                if (index > visibleRecs) break;
+                Console.WriteLine($"{index} : {visibleRecs}");
+                DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone();
+                row.Cells[0].Value = dev.GetName();
+                row.Cells[1].Value = dev.GetAddress();
+                row.Cells[2].Value = dev.GetEmpType();
+                row.Cells[3].Value = dev.GetSupervisor();
+                row.Cells[5].Value = dev.GetDevType();
+                row.Cells[6].Value = dev.GetTaxType();
+                dataArr.Rows.Add(row);
+                index++;
+            }
+            foreach (Manager mgr in mgrs)
+            {
+                if (index > visibleRecs) break;
+                DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone();
+                row.Cells[0].Value = mgr.GetName();
+                row.Cells[1].Value = mgr.GetAddress();
+                row.Cells[2].Value = mgr.GetEmpType();
+                row.Cells[3].Value = mgr.GetSupervisor();
+                row.Cells[4].Value = mgr.GetCostCenter();
+                dataArr.Rows.Add(row);
+                index++;
             }
         }
 
@@ -140,8 +140,7 @@ namespace Record_Objects
 
         private void recordChoice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // visibleRecs = int.Parse(recordChoice.Text.Substring(0, 1));
-            visibleRecs = recordChoice.SelectedIndex;
+            visibleRecs = recordChoice.SelectedIndex + 1;
             UpdateArr();
         }
     }
