@@ -38,6 +38,7 @@ namespace Record_Objects
 
         private void UpdateRecChoice()
         {
+            recordChoice.Items.Clear();
             for (int i = 1; i <= file.Length; i++)
             {
                 recordChoice.Items.Add($"{i} records");
@@ -79,6 +80,7 @@ namespace Record_Objects
 
         private void UpdateArr()
         {
+            dataArr.AllowUserToDeleteRows = true;
             while (dataArr.Rows.Count > 0)
             {
                 foreach (DataGridViewRow row in dataArr.Rows)
@@ -86,6 +88,7 @@ namespace Record_Objects
                     dataArr.Rows.Remove(row);
                 }
             }
+            dataArr.AllowUserToDeleteRows = false;
             int index = 0;
             while (index < visibleRecs)
             {
