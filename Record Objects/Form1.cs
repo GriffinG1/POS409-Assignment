@@ -80,7 +80,6 @@ namespace Record_Objects
 
         private void UpdateArr()
         {
-            dataArr.AllowUserToDeleteRows = true;
             while (dataArr.Rows.Count > 0)
             {
                 foreach (DataGridViewRow row in dataArr.Rows)
@@ -88,12 +87,10 @@ namespace Record_Objects
                     dataArr.Rows.Remove(row);
                 }
             }
-            dataArr.AllowUserToDeleteRows = false;
             int index = 1;
             foreach (Developer dev in devs)
             {
                 if (index > visibleRecs) break;
-                Console.WriteLine($"{index} : {visibleRecs}");
                 DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone();
                 row.Cells[0].Value = dev.GetName();
                 row.Cells[1].Value = dev.GetAddress();
