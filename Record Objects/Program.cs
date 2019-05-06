@@ -11,6 +11,7 @@ namespace Record_Objects
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+
         [STAThread]
         static void Main()
         {
@@ -28,6 +29,7 @@ namespace Record_Objects
         private string city;
         private string state;
         private string zipCode;
+        private string empType;
 
         public Employee() { }
 
@@ -39,6 +41,11 @@ namespace Record_Objects
         public string GetAddress()
         {
             return $"{address}, {city}, {state}, {zipCode}";
+        }
+
+        public string GetEmpType()
+        {
+            return empType;
         }
 
         public void SetName(string firstName, string lastName)
@@ -53,6 +60,11 @@ namespace Record_Objects
             this.city = city;
             this.state = state;
             this.zipCode = zipCode;
+        }
+
+        public void SetEmpType(string empType)
+        {
+            this.empType = empType;
         }
     }
 
@@ -69,16 +81,6 @@ namespace Record_Objects
         public string GetSupervisor()
         {
             return supervisor;
-        }
-
-        public string GetDevType()
-        {
-            return "N/A";
-        }
-
-        public string GetTaxType()
-        {
-            return "N/A";
         }
 
         public void SetCostCenter(string costCenter)
@@ -111,11 +113,6 @@ namespace Record_Objects
         public string GetTaxType()
         {
             return taxType;
-        }
-
-        public string GetCostCenter()
-        {
-            return "0";
         }
 
         public void SetDevType(string developerType)
