@@ -15,6 +15,7 @@ namespace Record_Objects
     {
         private string[] file;
         private int visibleRecs;
+        private int viableFileLength;
         private List<Developer> devs;
         private List<Manager> mgrs;
 
@@ -31,6 +32,7 @@ namespace Record_Objects
             {
                 filePathBox.Text = dialog.FileName;
                 file = File.ReadAllLines(dialog.FileName);
+                viableFileLength = file.Length;
                 CreateObjs();
                 UpdateRecChoice();
             }
@@ -39,22 +41,29 @@ namespace Record_Objects
         private void UpdateRecChoice()
         {
             recordChoice.Items.Clear();
-            for (int i = 1; i <= file.Length; i++)
+            for (int i = 1; i <= viableFileLength; i++)
             {
                 recordChoice.Items.Add($"{i} records");
             }
             recordChoice.Enabled = true;
-            recordChoice.SelectedIndex = file.Length-1;
+            recordChoice.SelectedIndex = viableFileLength - 1;
         }
 
         private void CreateObjs()
         {
             devs = new List<Developer>();
             mgrs = new List<Manager>();
+            List<string> badLines = new List<string>();
             for (int i = 0; i < file.Length; i++)
             {
                 string[] empInfo = file[i].Split(',');
-                if (empInfo[6] == "Developer")
+                if (empInfo.Length < 11)
+                {
+                    if (badLines.Count == 10) badLines.Add("..."); // Upper limit on bad lines
+                    if (badLines.Count < 10) badLines.Add("#" + (i + 1).ToString()); ;
+                    viableFileLength--;
+                }
+                else if (empInfo[6] == "Developer")
                 {
                     Developer dev = new Developer();
                     dev.SetName(empInfo[0], empInfo[1]);
@@ -75,6 +84,14 @@ namespace Record_Objects
                     mgr.SetSupervisor(empInfo[10]);
                     mgrs.Add(mgr);
                 }
+            }
+            if (badLines.Count > 0)
+            {
+                string error = "Line(s) ";
+                error += string.Join(", ", badLines.ToList());
+                error += " of your data was missing a value, or was formatted incorrectly, and as such was skipped.";
+                MessageBox.Show(error, "Incorrect Line",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
