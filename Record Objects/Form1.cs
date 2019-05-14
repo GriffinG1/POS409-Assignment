@@ -24,32 +24,32 @@ namespace Record_Objects
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // Loads file
         {
             OpenFileDialog dialog = new OpenFileDialog();
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 filePathBox.Text = dialog.FileName;
-                file = File.ReadAllLines(dialog.FileName);
+                file = File.ReadAllLines(dialog.FileName); // Pulls file content into string[] file
                 viableFileLength = file.Length;
                 CreateObjs();
                 UpdateRecChoice();
             }
         }
 
-        private void UpdateRecChoice()
+        private void UpdateRecChoice() // Updates the items in the combo box
         {
             recordChoice.Items.Clear();
             for (int i = 1; i <= viableFileLength; i++)
             {
                 recordChoice.Items.Add($"{i} records");
             }
-            recordChoice.Enabled = true;
+            recordChoice.Enabled = true; // Enables combo box on first load
             recordChoice.SelectedIndex = viableFileLength - 1;
         }
 
-        private void CreateObjs()
+        private void CreateObjs() // Resets the objects and their lists on new load
         {
             devs = new List<Developer>();
             mgrs = new List<Manager>();
@@ -57,7 +57,7 @@ namespace Record_Objects
             for (int i = 0; i < file.Length; i++)
             {
                 string[] empInfo = file[i].Split(',');
-                if (empInfo.Length < 11)
+                if (empInfo.Length < 11) // Ensures each line is correct
                 {
                     if (badLines.Count == 10) badLines.Add("..."); // Upper limit on bad lines
                     if (badLines.Count < 10) badLines.Add("#" + (i + 1).ToString()); ;
@@ -85,7 +85,7 @@ namespace Record_Objects
                     mgrs.Add(mgr);
                 }
             }
-            if (badLines.Count > 0)
+            if (badLines.Count > 0) // Throws error at end of loading
             {
                 string error = "Line(s) ";
                 error += string.Join(", ", badLines.ToList());
@@ -95,9 +95,9 @@ namespace Record_Objects
             }
         }
 
-        private void UpdateArr()
+        private void UpdateArr() // Clears and adds objects to the Data Grid
         {
-            while (dataArr.Rows.Count > 0)
+            while (dataArr.Rows.Count > 0) // Clears rows
             {
                 foreach (DataGridViewRow row in dataArr.Rows)
                 {
@@ -107,8 +107,8 @@ namespace Record_Objects
             int index = 1;
             foreach (Developer dev in devs)
             {
-                if (index > visibleRecs) break;
-                DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone();
+                if (index > visibleRecs) break; // Ensures only the selected amount show
+                DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone(); // Creates a new row by cloning from a template
                 row.Cells[0].Value = dev.GetName();
                 row.Cells[1].Value = dev.GetAddress();
                 row.Cells[2].Value = dev.GetEmpType();
@@ -120,8 +120,8 @@ namespace Record_Objects
             }
             foreach (Manager mgr in mgrs)
             {
-                if (index > visibleRecs) break;
-                DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone();
+                if (index > visibleRecs) break; // Ensures only the selected amount show
+                DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone(); // Creates a new row by cloning from a template
                 row.Cells[0].Value = mgr.GetName();
                 row.Cells[1].Value = mgr.GetAddress();
                 row.Cells[2].Value = mgr.GetEmpType();
@@ -149,7 +149,7 @@ namespace Record_Objects
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Close();
+            Close(); // Exits program
         }
 
         private void recordChoice_SelectedIndexChanged(object sender, EventArgs e)
