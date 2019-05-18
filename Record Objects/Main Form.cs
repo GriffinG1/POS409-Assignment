@@ -18,6 +18,8 @@ namespace Record_Objects
         private int viableFileLength;
         private List<Developer> devs;
         private List<Manager> mgrs;
+        private List<Developer> devSearch;
+        private List<Manager> mgrSearch;
 
         public Form1()
         {
@@ -35,6 +37,7 @@ namespace Record_Objects
                 viableFileLength = file.Length;
                 CreateObjs();
                 UpdateRecChoice();
+                searchInputs.Enabled = true;
             }
         }
 
@@ -156,6 +159,23 @@ namespace Record_Objects
         {
             visibleRecs = recordChoice.SelectedIndex + 1;
             UpdateArr();
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            Form2 searchForm = new Form2(devSearch, mgrSearch);
+            searchForm.Show();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            // null
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            devSearch = devs.Where(dev => dev.GetName().Contains(Text) || dev.GetAddress().Contains(Text)).ToList();
+            mgrSearch = mgrs.Where(mgr => mgr.GetName().Contains(Text) || mgr.GetAddress().Contains(Text)).ToList();
         }
     }
 }

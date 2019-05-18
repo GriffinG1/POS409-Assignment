@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Record_Objects
 {
-    class Manager : Employee
+    public class Manager : Employee
     {
         private string costCenter;
         private string supervisor;

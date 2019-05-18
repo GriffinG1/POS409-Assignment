@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Record_Objects
 {
-    class Developer : Employee
+    public class Developer : Employee
     {
         private string developerType;
         private string supervisor;

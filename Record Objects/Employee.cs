@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Record_Objects
 {
-    class Employee
+    public class Employee
     {
         private string firstName;
         private string lastName;
