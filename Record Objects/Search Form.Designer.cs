@@ -53,6 +53,9 @@
             this.dataArr.AllowUserToAddRows = false;
             this.dataArr.AllowUserToDeleteRows = false;
             this.dataArr.AllowUserToOrderColumns = true;
+            this.dataArr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataArr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataArr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EmpName,
@@ -119,7 +122,7 @@
             this.cloneArr.Location = new System.Drawing.Point(29, 12);
             this.cloneArr.Name = "cloneArr";
             this.cloneArr.ShowEditingIcon = false;
-            this.cloneArr.Size = new System.Drawing.Size(742, 321);
+            this.cloneArr.Size = new System.Drawing.Size(18, 16);
             this.cloneArr.TabIndex = 4;
             // 
             // dataGridViewTextBoxColumn1
@@ -165,6 +168,7 @@
             this.Controls.Add(this.dataArr);
             this.Controls.Add(this.cloneArr);
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataArr)).EndInit();

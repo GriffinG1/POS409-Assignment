@@ -35,13 +35,6 @@ namespace Record_Objects
 
         private void UpdateArr() // Clears and adds objects to the Data Grid
         {
-            /*while (dataArr.Rows.Count > 0) // Clears rows
-            {
-                foreach (DataGridViewRow row in dataArr.Rows)
-                {
-                    dataArr.Rows.Remove(row);
-                }
-            } */
             foreach (Developer dev in devs)
             {
                 DataGridViewRow row = (DataGridViewRow)cloneArr.Rows[0].Clone(); // Creates a new row by cloning from a template

@@ -48,12 +48,12 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.recordChoice = new System.Windows.Forms.ComboBox();
-            this.displayText = new System.Windows.Forms.TextBox();
             this.endProgram = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
-            this.managerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.searchInputs = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.managerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataArr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cloneArr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.managerBindingSource)).BeginInit();
@@ -61,9 +61,10 @@
             // 
             // fileSelectionButton
             // 
-            this.fileSelectionButton.Location = new System.Drawing.Point(662, 349);
+            this.fileSelectionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileSelectionButton.Location = new System.Drawing.Point(662, 347);
             this.fileSelectionButton.Name = "fileSelectionButton";
-            this.fileSelectionButton.Size = new System.Drawing.Size(109, 23);
+            this.fileSelectionButton.Size = new System.Drawing.Size(110, 23);
             this.fileSelectionButton.TabIndex = 0;
             this.fileSelectionButton.Text = "Select File to Load";
             this.fileSelectionButton.UseVisualStyleBackColor = true;
@@ -71,10 +72,12 @@
             // 
             // filePathBox
             // 
-            this.filePathBox.Location = new System.Drawing.Point(29, 352);
+            this.filePathBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.filePathBox.Location = new System.Drawing.Point(29, 350);
             this.filePathBox.Name = "filePathBox";
             this.filePathBox.ReadOnly = true;
-            this.filePathBox.Size = new System.Drawing.Size(602, 20);
+            this.filePathBox.Size = new System.Drawing.Size(603, 20);
             this.filePathBox.TabIndex = 1;
             this.filePathBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -83,6 +86,9 @@
             this.dataArr.AllowUserToAddRows = false;
             this.dataArr.AllowUserToDeleteRows = false;
             this.dataArr.AllowUserToOrderColumns = true;
+            this.dataArr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataArr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataArr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EmpName,
@@ -95,7 +101,7 @@
             this.dataArr.Location = new System.Drawing.Point(29, 12);
             this.dataArr.Name = "dataArr";
             this.dataArr.ShowEditingIcon = false;
-            this.dataArr.Size = new System.Drawing.Size(742, 321);
+            this.dataArr.Size = new System.Drawing.Size(743, 319);
             this.dataArr.TabIndex = 2;
             // 
             // EmpName
@@ -149,7 +155,7 @@
             this.cloneArr.Location = new System.Drawing.Point(29, 12);
             this.cloneArr.Name = "cloneArr";
             this.cloneArr.ShowEditingIcon = false;
-            this.cloneArr.Size = new System.Drawing.Size(742, 321);
+            this.cloneArr.Size = new System.Drawing.Size(17, 15);
             this.cloneArr.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
@@ -189,29 +195,22 @@
             // 
             // recordChoice
             // 
+            this.recordChoice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.recordChoice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.recordChoice.Enabled = false;
             this.recordChoice.FormattingEnabled = true;
-            this.recordChoice.Location = new System.Drawing.Point(179, 400);
+            this.recordChoice.Location = new System.Drawing.Point(179, 398);
             this.recordChoice.Name = "recordChoice";
-            this.recordChoice.Size = new System.Drawing.Size(121, 21);
+            this.recordChoice.Size = new System.Drawing.Size(122, 21);
             this.recordChoice.TabIndex = 4;
             this.recordChoice.SelectedIndexChanged += new System.EventHandler(this.recordChoice_SelectedIndexChanged);
             // 
-            // displayText
-            // 
-            this.displayText.Location = new System.Drawing.Point(29, 400);
-            this.displayText.Name = "displayText";
-            this.displayText.ReadOnly = true;
-            this.displayText.Size = new System.Drawing.Size(144, 20);
-            this.displayText.TabIndex = 5;
-            this.displayText.Text = "Number of records to display: ";
-            // 
             // endProgram
             // 
-            this.endProgram.Location = new System.Drawing.Point(681, 401);
+            this.endProgram.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.endProgram.Location = new System.Drawing.Point(681, 399);
             this.endProgram.Name = "endProgram";
-            this.endProgram.Size = new System.Drawing.Size(75, 23);
+            this.endProgram.Size = new System.Drawing.Size(76, 23);
             this.endProgram.TabIndex = 6;
             this.endProgram.Text = "Exit";
             this.endProgram.UseVisualStyleBackColor = true;
@@ -219,53 +218,71 @@
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(600, 401);
+            this.searchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchButton.Location = new System.Drawing.Point(600, 399);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.Size = new System.Drawing.Size(76, 23);
             this.searchButton.TabIndex = 7;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.button1_Click_2);
             // 
-            // managerBindingSource
-            // 
-            this.managerBindingSource.DataSource = typeof(Record_Objects.Manager);
-            // 
             // searchInputs
             // 
+            this.searchInputs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.searchInputs.Enabled = false;
-            this.searchInputs.Location = new System.Drawing.Point(408, 401);
+            this.searchInputs.Location = new System.Drawing.Point(408, 399);
             this.searchInputs.Name = "searchInputs";
-            this.searchInputs.Size = new System.Drawing.Size(186, 20);
+            this.searchInputs.Size = new System.Drawing.Size(187, 20);
             this.searchInputs.TabIndex = 8;
             this.searchInputs.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
-            // textBox2
+            // label1
             // 
-            this.textBox2.Location = new System.Drawing.Point(315, 401);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(78, 20);
-            this.textBox2.TabIndex = 9;
-            this.textBox2.Text = "Search terms:";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(26, 401);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(147, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Number of records to display: ";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(329, 401);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Search terms:";
+            // 
+            // managerBindingSource
+            // 
+            this.managerBindingSource.DataSource = typeof(Record_Objects.Manager);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox2);
+            this.ClientSize = new System.Drawing.Size(801, 448);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.searchInputs);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.endProgram);
-            this.Controls.Add(this.displayText);
             this.Controls.Add(this.recordChoice);
             this.Controls.Add(this.filePathBox);
             this.Controls.Add(this.fileSelectionButton);
             this.Controls.Add(this.dataArr);
             this.Controls.Add(this.cloneArr);
+            this.MinimumSize = new System.Drawing.Size(817, 487);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Employee Info";
             ((System.ComponentModel.ISupportInitialize)(this.dataArr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cloneArr)).EndInit();
@@ -297,11 +314,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.ComboBox recordChoice;
-        private System.Windows.Forms.TextBox displayText;
         private System.Windows.Forms.Button endProgram;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TextBox searchInputs;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

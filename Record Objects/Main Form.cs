@@ -100,13 +100,7 @@ namespace Record_Objects
 
         private void UpdateArr() // Clears and adds objects to the Data Grid
         {
-            while (dataArr.Rows.Count > 0) // Clears rows
-            {
-                foreach (DataGridViewRow row in dataArr.Rows)
-                {
-                    dataArr.Rows.Remove(row);
-                }
-            }
+            dataArr.Rows.Clear();
             int index = 1;
             foreach (Developer dev in devs)
             {
@@ -164,7 +158,7 @@ namespace Record_Objects
         private void button1_Click_2(object sender, EventArgs e)
         {
             Form2 searchForm = new Form2(devSearch, mgrSearch);
-            searchForm.Show();
+            searchForm.ShowDialog();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -174,8 +168,13 @@ namespace Record_Objects
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
-            devSearch = devs.Where(dev => dev.GetName().Contains(Text) || dev.GetAddress().Contains(Text)).ToList();
-            mgrSearch = mgrs.Where(mgr => mgr.GetName().Contains(Text) || mgr.GetAddress().Contains(Text)).ToList();
+            devSearch = devs.Where(dev => dev.GetName().Contains(searchInputs.Text) || dev.GetAddress().Contains(searchInputs.Text)).ToList();
+            mgrSearch = mgrs.Where(mgr => mgr.GetName().Contains(searchInputs.Text) || mgr.GetAddress().Contains(searchInputs.Text)).ToList();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            // null
         }
     }
 }
