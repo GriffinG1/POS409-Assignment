@@ -15,10 +15,9 @@ namespace Record_Objects
 {
     public partial class Form1 : Form
     {
-        private string[] oldfile;
+        JToken file;
         private int visibleRecs;
         private int viableFileLength;
-        JToken file;
         private List<Developer> devs;
         private List<Manager> mgrs;
         private List<Developer> devSearch;
@@ -36,7 +35,6 @@ namespace Record_Objects
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                Console.WriteLine(File.ReadAllText(dialog.FileName));
                 filePathBox.Text = dialog.FileName;
                 file = JToken.Parse(File.ReadAllText(dialog.FileName)); // Pulls file content into string[] file
                 viableFileLength = file.Count();
@@ -61,10 +59,10 @@ namespace Record_Objects
         {
             devs = new List<Developer>();
             mgrs = new List<Manager>();
-            List<string> badLines = new List<string>();
+            bool badLines = false;
             foreach (JObject emp in file.Children())
             {
-                Dictionary<string, string> empDict = emp.ToObject<Dictionary<string, string>>();
+                Dictionary<string, string> empDict = emp.ToObject<Dictionary<string, string>>(); // Convert each employee to a dict
                 try
                 {
                     if (empDict["empType"] == "Developer")
@@ -92,9 +90,10 @@ namespace Record_Objects
                 catch (KeyNotFoundException)
                 {
                     viableFileLength--;
+                    badLines = true;
                 }
             }
-            if (badLines.Count > 0) // Throws error at end of loading
+            if (badLines) // Throws error at end of loading
             {
                 MessageBox.Show("Some entries in your file were missing values, and as such were skipped", "Incorrect Line",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
