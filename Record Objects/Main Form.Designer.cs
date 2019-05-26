@@ -79,7 +79,6 @@
             this.filePathBox.ReadOnly = true;
             this.filePathBox.Size = new System.Drawing.Size(603, 20);
             this.filePathBox.TabIndex = 1;
-            this.filePathBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // dataArr
             // 
@@ -248,7 +247,6 @@
             this.label1.Size = new System.Drawing.Size(147, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Number of records to display: ";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 

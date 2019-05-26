@@ -8,14 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Record_Objects
 {
     public partial class Form1 : Form
     {
-        private string[] file;
+        private string[] oldfile;
         private int visibleRecs;
         private int viableFileLength;
+        JToken file;
         private List<Developer> devs;
         private List<Manager> mgrs;
         private List<Developer> devSearch;
@@ -29,12 +32,14 @@ namespace Record_Objects
         private void button1_Click(object sender, EventArgs e) // Loads file
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = ".json files (*.json)|*.json|All files (*.*)|*.*";
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
+                Console.WriteLine(File.ReadAllText(dialog.FileName));
                 filePathBox.Text = dialog.FileName;
-                file = File.ReadAllLines(dialog.FileName); // Pulls file content into string[] file
-                viableFileLength = file.Length;
+                file = JToken.Parse(File.ReadAllText(dialog.FileName)); // Pulls file content into string[] file
+                viableFileLength = file.Count();
                 CreateObjs();
                 UpdateRecChoice();
                 searchInputs.Enabled = true;
@@ -57,49 +62,47 @@ namespace Record_Objects
             devs = new List<Developer>();
             mgrs = new List<Manager>();
             List<string> badLines = new List<string>();
-            for (int i = 0; i < file.Length; i++)
+            foreach (JObject emp in file.Children())
             {
-                string[] empInfo = file[i].Split(',');
-                if (empInfo.Length < 11) // Ensures each line is correct
+                Dictionary<string, string> empDict = emp.ToObject<Dictionary<string, string>>();
+                try
                 {
-                    if (badLines.Count == 10) badLines.Add("..."); // Upper limit on bad lines
-                    if (badLines.Count < 10) badLines.Add("#" + (i + 1).ToString()); ;
+                    if (empDict["empType"] == "Developer")
+                    {
+                        Developer dev = new Developer();
+                        dev.SetName(empDict["firstName"], empDict["lastName"]);
+                        dev.SetAddress(empDict["street"], empDict["city"], empDict["state"], empDict["zipCode"]);
+                        dev.SetEmpType(empDict["empType"]);
+                        dev.SetDevType(empDict["devType"]);
+                        dev.SetSupervisor(empDict["supervisor"]);
+                        dev.SetTaxType(empDict["taxType"]);
+                        devs.Add(dev);
+                    }
+                    else
+                    {
+                        Manager mgr = new Manager();
+                        mgr.SetName(empDict["firstName"], empDict["lastName"]);
+                        mgr.SetAddress(empDict["street"], empDict["city"], empDict["state"], empDict["zipCode"]);
+                        mgr.SetEmpType(empDict["empType"]);
+                        mgr.SetCostCenter(empDict["costCenter"]);
+                        mgr.SetSupervisor(empDict["supervisor"]);
+                        mgrs.Add(mgr);
+                    }
+                }
+                catch (KeyNotFoundException)
+                {
                     viableFileLength--;
-                }
-                else if (empInfo[6] == "Developer")
-                {
-                    Developer dev = new Developer();
-                    dev.SetName(empInfo[0], empInfo[1]);
-                    dev.SetAddress(empInfo[2], empInfo[3], empInfo[4], empInfo[5]);
-                    dev.SetEmpType(empInfo[6]);
-                    dev.SetDevType(empInfo[7]);
-                    dev.SetSupervisor(empInfo[9]);
-                    dev.SetTaxType(empInfo[10]);
-                    devs.Add(dev);
-                }
-                else
-                {
-                    Manager mgr = new Manager();
-                    mgr.SetName(empInfo[0], empInfo[1]);
-                    mgr.SetAddress(empInfo[2], empInfo[3], empInfo[4], empInfo[5]);
-                    mgr.SetEmpType(empInfo[6]);
-                    mgr.SetCostCenter(empInfo[8]);
-                    mgr.SetSupervisor(empInfo[10]);
-                    mgrs.Add(mgr);
                 }
             }
             if (badLines.Count > 0) // Throws error at end of loading
             {
-                string error = "Line(s) ";
-                error += string.Join(", ", badLines.ToList());
-                error += " of your data was missing a value, or was formatted incorrectly, and as such was skipped.";
-                MessageBox.Show(error, "Incorrect Line",
+                MessageBox.Show("Some entries in your file were missing values, and as such were skipped", "Incorrect Line",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void UpdateArr() // Clears and adds objects to the Data Grid
-        {
+        { 
             dataArr.Rows.Clear();
             int index = 1;
             foreach (Developer dev in devs)
@@ -129,21 +132,6 @@ namespace Record_Objects
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            // null, as text box is not manual
-        }
-
-        private void infoArr_Paint(object sender, PaintEventArgs e)
-        {
-            // null
-        }
-
-        private void dataArr_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // null
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             Close(); // Exits program
@@ -161,20 +149,10 @@ namespace Record_Objects
             searchForm.ShowDialog();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            // null
-        }
-
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
             devSearch = devs.Where(dev => dev.GetName().Contains(searchInputs.Text) || dev.GetAddress().Contains(searchInputs.Text)).ToList();
             mgrSearch = mgrs.Where(mgr => mgr.GetName().Contains(searchInputs.Text) || mgr.GetAddress().Contains(searchInputs.Text)).ToList();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            // null
         }
     }
 }
