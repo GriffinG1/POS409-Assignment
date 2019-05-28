@@ -68,7 +68,7 @@
             this.fileSelectionButton.TabIndex = 0;
             this.fileSelectionButton.Text = "Select File to Load";
             this.fileSelectionButton.UseVisualStyleBackColor = true;
-            this.fileSelectionButton.Click += new System.EventHandler(this.button1_Click);
+            this.fileSelectionButton.Click += new System.EventHandler(this.openFileButton_Clicked);
             // 
             // filePathBox
             // 
@@ -213,7 +213,7 @@
             this.endProgram.TabIndex = 6;
             this.endProgram.Text = "Exit";
             this.endProgram.UseVisualStyleBackColor = true;
-            this.endProgram.Click += new System.EventHandler(this.button1_Click_1);
+            this.endProgram.Click += new System.EventHandler(this.exitButton_Clicked);
             // 
             // searchButton
             // 
@@ -224,7 +224,7 @@
             this.searchButton.TabIndex = 7;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.button1_Click_2);
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Clicked);
             // 
             // searchInputs
             // 
@@ -235,7 +235,6 @@
             this.searchInputs.Name = "searchInputs";
             this.searchInputs.Size = new System.Drawing.Size(187, 20);
             this.searchInputs.TabIndex = 8;
-            this.searchInputs.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // label1
             // 

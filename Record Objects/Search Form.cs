@@ -15,22 +15,12 @@ namespace Record_Objects
         private List<Developer> devs;
         private List<Manager> mgrs;
 
-        public Form2()
-        {
-            InitializeComponent();
-        }
-
         public Form2(List<Developer> devs, List<Manager> mgrs)
         {
             this.devs = devs;
             this.mgrs = mgrs;
             InitializeComponent();
             UpdateArr();
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void UpdateArr() // Clears and adds objects to the Data Grid

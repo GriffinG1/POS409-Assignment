@@ -28,20 +28,21 @@ namespace Record_Objects
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e) // Loads file
+        private void openFileButton_Clicked(object sender, EventArgs e) // Loads file
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = ".json files (*.json)|*.json|All files (*.*)|*.*";
-            DialogResult result = dialog.ShowDialog();
-            if (result == DialogResult.OK)
+            OpenFileDialog dialog = new OpenFileDialog
             {
-                filePathBox.Text = dialog.FileName;
-                file = JToken.Parse(File.ReadAllText(dialog.FileName)); // Pulls file content into string[] file
-                viableFileLength = file.Count();
-                CreateObjs();
-                UpdateRecChoice();
-                searchInputs.Enabled = true;
-            }
+                Filter = ".json files (*.json)|*.json|All files (*.*)|*.*"
+            };
+            DialogResult result = dialog.ShowDialog();
+            if (result != DialogResult.OK)
+                return;
+            filePathBox.Text = dialog.FileName;
+            file = JToken.Parse(File.ReadAllText(dialog.FileName)); // Pulls file content into JToken file
+            viableFileLength = file.Count();
+            CreateObjs();
+            UpdateRecChoice();
+            searchInputs.Enabled = true;
         }
 
         private void UpdateRecChoice() // Updates the items in the combo box
@@ -59,8 +60,8 @@ namespace Record_Objects
         {
             devs = new List<Developer>();
             mgrs = new List<Manager>();
-            bool badLines = false;
-            foreach (JObject emp in file.Children())
+            int badLineCount = 0;
+            foreach (JObject emp in file.Children()) // Iterate through every employee in the file, and attempt to create each object
             {
                 Dictionary<string, string> empDict = emp.ToObject<Dictionary<string, string>>(); // Convert each employee to a dict
                 try
@@ -87,15 +88,16 @@ namespace Record_Objects
                         mgrs.Add(mgr);
                     }
                 }
-                catch (KeyNotFoundException)
+                catch (KeyNotFoundException) // In case data is missing from an employee, or the key is wrong
                 {
                     viableFileLength--;
-                    badLines = true;
+                    badLineCount++;
                 }
             }
-            if (badLines) // Throws error at end of loading
+            if (badLineCount > 0) // Throws error at end of loading
             {
-                MessageBox.Show("Some entries in your file were missing values, and as such were skipped", "Incorrect Line",
+                MessageBox.Show($"{badLineCount} {(badLineCount == 1 ? "entry" : "entries")} in your file {(badLineCount == 1 ? "was" : "were")} " +
+                    $"missing values, and as such {(badLineCount == 1 ? "was" : "were")} skipped", "Incorrect Line",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -131,7 +133,7 @@ namespace Record_Objects
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void exitButton_Clicked(object sender, EventArgs e)
         {
             Close(); // Exits program
         }
@@ -142,13 +144,14 @@ namespace Record_Objects
             UpdateArr();
         }
 
-        private void button1_Click_2(object sender, EventArgs e)
+        private void searchButton_Clicked(object sender, EventArgs e)
         {
+            doSearch();
             Form2 searchForm = new Form2(devSearch, mgrSearch);
             searchForm.ShowDialog();
         }
 
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        private void doSearch()
         {
             devSearch = devs.Where(dev => dev.GetName().Contains(searchInputs.Text) || dev.GetAddress().Contains(searchInputs.Text)).ToList();
             mgrSearch = mgrs.Where(mgr => mgr.GetName().Contains(searchInputs.Text) || mgr.GetAddress().Contains(searchInputs.Text)).ToList();
