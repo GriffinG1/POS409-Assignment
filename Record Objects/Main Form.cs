@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Record_Objects
@@ -28,7 +23,7 @@ namespace Record_Objects
             InitializeComponent();
         }
 
-        private void openFileButton_Clicked(object sender, EventArgs e) // Loads file
+        private void OpenFileButton_Clicked(object sender, EventArgs e) // Loads file
         {
             OpenFileDialog dialog = new OpenFileDialog
             {
@@ -133,25 +128,25 @@ namespace Record_Objects
             }
         }
 
-        private void exitButton_Clicked(object sender, EventArgs e)
+        private void ExitButton_Clicked(object sender, EventArgs e)
         {
             Close(); // Exits program
         }
 
-        private void recordChoice_SelectedIndexChanged(object sender, EventArgs e)
+        private void RecordChoice_SelectedIndexChanged(object sender, EventArgs e)
         {
             visibleRecs = recordChoice.SelectedIndex + 1;
             UpdateArr();
         }
 
-        private void searchButton_Clicked(object sender, EventArgs e)
+        private void SearchButton_Clicked(object sender, EventArgs e)
         {
-            doSearch();
+            DoSearch();
             Form2 searchForm = new Form2(devSearch, mgrSearch);
             searchForm.ShowDialog();
         }
 
-        private void doSearch()
+        private void DoSearch()
         {
             devSearch = devs.Where(dev => dev.GetName().Contains(searchInputs.Text) || dev.GetAddress().Contains(searchInputs.Text)).ToList();
             mgrSearch = mgrs.Where(mgr => mgr.GetName().Contains(searchInputs.Text) || mgr.GetAddress().Contains(searchInputs.Text)).ToList();

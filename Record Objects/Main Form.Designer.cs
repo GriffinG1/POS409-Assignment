@@ -68,7 +68,7 @@
             this.fileSelectionButton.TabIndex = 0;
             this.fileSelectionButton.Text = "Select File to Load";
             this.fileSelectionButton.UseVisualStyleBackColor = true;
-            this.fileSelectionButton.Click += new System.EventHandler(this.openFileButton_Clicked);
+            this.fileSelectionButton.Click += new System.EventHandler(this.OpenFileButton_Clicked);
             // 
             // filePathBox
             // 
@@ -202,7 +202,7 @@
             this.recordChoice.Name = "recordChoice";
             this.recordChoice.Size = new System.Drawing.Size(122, 21);
             this.recordChoice.TabIndex = 4;
-            this.recordChoice.SelectedIndexChanged += new System.EventHandler(this.recordChoice_SelectedIndexChanged);
+            this.recordChoice.SelectedIndexChanged += new System.EventHandler(this.RecordChoice_SelectedIndexChanged);
             // 
             // endProgram
             // 
@@ -213,7 +213,7 @@
             this.endProgram.TabIndex = 6;
             this.endProgram.Text = "Exit";
             this.endProgram.UseVisualStyleBackColor = true;
-            this.endProgram.Click += new System.EventHandler(this.exitButton_Clicked);
+            this.endProgram.Click += new System.EventHandler(this.ExitButton_Clicked);
             // 
             // searchButton
             // 
@@ -224,7 +224,7 @@
             this.searchButton.TabIndex = 7;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Clicked);
+            this.searchButton.Click += new System.EventHandler(this.SearchButton_Clicked);
             // 
             // searchInputs
             // 
